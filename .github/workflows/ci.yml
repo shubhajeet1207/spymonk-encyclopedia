@@ -1,0 +1,82 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  backend:
+    runs-on: ubuntu-latest
+    env:
+      HF_HUB_DISABLE_TELEMETRY: "1"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+          cache-dependency-path: |
+            requirements*.txt
+            constraints.txt
+      - name: Install dependencies (CPU-only torch keeps the install small)
+        run: >
+          python -m pip install
+          --extra-index-url https://download.pytorch.org/whl/cpu
+          -r requirements-dev.txt -c constraints.txt
+      - name: Unit tests
+        run: python -m unittest discover -s tests -t .
+
+  dependency-audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: python -m pip install pip-audit
+      - name: Audit Python dependencies for known vulnerabilities
+        run: pip-audit -r requirements-local-embeddings.txt
+
+  frontend:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: frontend
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+      - run: npm ci
+      - run: npm test
+      - run: npm run build
+      - name: Audit runtime npm dependencies
+        run: npm audit --omit=dev --audit-level=high
+
+  container:
+    # The image deployed to Hugging Face Spaces (docs/DEPLOY_HF_SPACES.md).
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build the deployment image
+        run: docker build --tag spymonk:ci .
+      - name: Refuse to start without a token in hosted mode
+        run: |
+          if docker run --rm -e SPACE_ID=ci/spymonk -e SPACE_HOST=ci-spymonk.hf.space spymonk:ci; then
+            echo "The hosted image started without APP_API_TOKEN" && exit 1
+          fi
+      - name: Start with a token and serve the UI and health check
+        run: |
+          docker run -d --name spymonk -p 7860:7860 -e APP_API_TOKEN=ci-token \
+            -e SPACE_ID=ci/spymonk -e SPACE_HOST=ci-spymonk.hf.space spymonk:ci
+          for i in $(seq 1 60); do
+            curl -sf -H "Host: ci-spymonk.hf.space" http://127.0.0.1:7860/api/health && break
+            sleep 2
+          done
+          curl -sf -H "Host: ci-spymonk.hf.space" http://127.0.0.1:7860/ | grep -q '<div id="root">'
+          docker logs spymonk
