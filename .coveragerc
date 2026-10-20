@@ -1,0 +1,8 @@
+# Coverage gate for CI (.github/workflows/ci.yml). Raise fail_under as
+# coverage grows; never lower it to make a change pass.
+[run]
+source = backend
+
+[report]
+fail_under = 83
+skip_empty = true

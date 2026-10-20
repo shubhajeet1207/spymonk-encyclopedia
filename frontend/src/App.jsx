@@ -43,6 +43,7 @@ function App() {
   const actionInFlight = useRef(false)
   const fileInput = useRef(null)
   const research = useResearchJob()
+  const resetResearch = research.reset
 
   const clearPrivateWorkspace = useCallback(() => {
     setTopic('')
@@ -50,9 +51,9 @@ function App() {
     setSelectedFiles([])
     setSearchPlan(null)
     setMessages([])
-    research.reset()
+    resetResearch()
     if (fileInput.current) fileInput.current.value = ''
-  }, [research.reset])
+  }, [resetResearch])
 
   const onAccessDenied = useCallback((error) => {
     api.clearToken()

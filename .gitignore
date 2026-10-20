@@ -22,3 +22,7 @@ memory/unanswered/
 Thumbs.db
 # API log, per-run research logs, and diagnostics (they hold claim text).
 logs/
+# Coverage data
+.coverage
+.coverage.*
+htmlcov/

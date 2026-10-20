@@ -79,7 +79,7 @@ function responseError(response, payload, id) {
 async function send(path, options, id) {
   try {
     return await fetch(`${API_BASE_URL}${path}`, { ...options, headers: requestHeaders(options.headers, id) })
-  } catch (error) {
+  } catch {
     if (options.signal?.aborted) throw new AbortedError()
     throw new ApiUnreachableError(id)
   }

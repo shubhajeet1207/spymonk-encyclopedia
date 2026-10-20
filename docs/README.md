@@ -5,6 +5,7 @@
 ## Start here
 
 - [Installation & usage](installation/README.md) — prerequisites, configuration, local startup, first research session, testing, deployment, and troubleshooting.
+- [CI/CD](CI_CD.md) — the checks every pull request passes, the schema check, deployment, and the one-time GitHub settings.
 - [Deploy on Hugging Face Spaces](DEPLOY_HF_SPACES.md) — free hosting for the whole app, with your archive backed up to a private dataset.
 - [Technical Requirements Document](TRD.md) — architecture, API contracts, storage, and deployment constraints.
 - [Architecture diagram](spymonk-architecture.drawio) — editable in draw.io / diagrams.net or its editor extension.

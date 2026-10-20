@@ -1,4 +1,6 @@
-# Everything needed to run the test suite and dependency audit locally or in CI.
+# Everything needed to run the checks locally or in CI.
 -r requirements-local-embeddings.txt
 pytest>=8.0
 pip-audit>=2.7
+ruff>=0.17
+coverage>=7.10

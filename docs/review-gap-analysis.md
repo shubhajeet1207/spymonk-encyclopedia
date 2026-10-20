@@ -107,6 +107,7 @@ Evidence came from reading the code and from checks against the local instance: 
   - A bad edit or disk failure loses work, since the code exists in one copy.
 - **Recommendation:** run `git init` and commit the code. `.gitignore` already excludes `.env`, the snapshots and PDFs in `data/`, topic and unanswered records in `memory/`, `chroma_db/`, and `logs/`. Decide on the root mood-board images (GAP-33) and check `git status` before the first commit. Push to a private remote, enable the workflow, and protect the main branch (CI must pass).
 - **Done when:** CI runs on every push and the main branch is protected.
+- **Status (2026-10-20): mostly done.** The code is on GitHub (`shubhajeet1207/spymonk-encyclopedia`), and the CI pipeline runs on every pull request to `main` ([CI_CD.md](CI_CD.md)). Open: the owner turning on branch protection and push protection.
 
 ### GAP-02
 
@@ -355,6 +356,7 @@ Evidence came from reading the code and from checks against the local instance: 
   - Add `ruff` (lint and format) and `mypy` or `pyright`, gradually, starting with `backend/core/evidence.py`, `verify.py`, and `store.py`.
   - Add ESLint (React hooks rules) and Prettier.
   - Add a coverage report with a floor that only rises.
+- **Status (2026-10-20): mostly done.** CI runs `ruff` (pyflakes, bugbear, bandit), ESLint with the React hooks rules, and coverage with an 83% floor. Open: type checking and a formatter.
 
 ### GAP-21
 
@@ -460,6 +462,7 @@ Evidence came from reading the code and from checks against the local instance: 
 
 - **Evidence:** `constraints.txt` pins exact versions without hashes, there's no automated dependency-update process, and the virtual environment's pip is version 23.2.1.
 - **Recommendation:** generate hashed locks (`pip-compile --generate-hashes` or `uv`), enable Dependabot or Renovate, and upgrade pip in CI.
+- **Status (2026-10-20): partly done.** Dependabot opens weekly grouped updates, and CI audits the exact pinned versions. Open: hashed locks.
 
 ### GAP-32
 
@@ -467,6 +470,7 @@ Evidence came from reading the code and from checks against the local instance: 
 
 - **Evidence:** the API reports 2.3.0, the UI footer shows V2.3, and [`frontend/package.json`](../frontend/package.json) says 2.0.0.
 - **Recommendation:** keep one version source (for example a `VERSION` file read by both builds) and tag releases.
+- **Status (2026-10-20): versions aligned** (UI package 2.3.0). Open: a single version source and release tags.
 
 ### GAP-33
 
