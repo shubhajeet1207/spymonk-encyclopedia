@@ -1,0 +1,26 @@
+# Core API dependencies. Local embeddings (the default EMBEDDING_PROVIDER)
+# also need requirements-local-embeddings.txt; hosted deployments using
+# EMBEDDING_PROVIDER=openai can install this file alone.
+# Pin to the tested versions with: -c constraints.txt
+langchain>=0.3.27
+langchain-core>=0.3.78
+langchain-community>=0.3.27
+langchain-text-splitters>=0.3.11
+langchain-openai>=0.3.33
+langchain-chroma>=0.2.6
+chromadb>=1.0.0
+pypdf==6.21.1
+tiktoken>=0.8.0
+fastapi>=0.115.0
+uvicorn[standard]>=0.34.0
+python-multipart>=0.0.20
+python-dotenv>=1.0.1
+ddgs>=9.0.0
+httpx>=0.27.0
+beautifulsoup4>=4.12.3
+tldextract>=5.0.0
+# Backup to a private Hugging Face dataset (BACKUP_TARGET=hf-dataset).
+huggingface_hub>=1.0
+# PDF reports for unanswered questions; uharfbuzz shapes Devanagari text.
+fpdf2>=2.8.9
+uharfbuzz>=0.56.0
