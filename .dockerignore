@@ -1,0 +1,24 @@
+# Only code goes into the image: never secrets, data, or local tooling.
+.env
+.env.*
+!.env.example
+.venv/
+venv/
+**/__pycache__/
+*.py[cod]
+.pytest_cache/
+.github/
+.spymonk-api.lock
+chroma_db/
+data/
+memory/
+logs/
+tests/
+docs/
+deploy/
+scripts/
+assets/
+*.jpg
+*.png
+frontend/node_modules/
+frontend/dist/

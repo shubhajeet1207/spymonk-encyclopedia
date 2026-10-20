@@ -1,0 +1,5 @@
+# Core API plus the in-process Sentence Transformers model (EMBEDDING_PROVIDER=huggingface).
+# Pulls in torch (several GB); hosted backends usually use EMBEDDING_PROVIDER=openai instead.
+-r requirements.txt
+langchain-huggingface>=0.2.0
+sentence-transformers>=3.3.1

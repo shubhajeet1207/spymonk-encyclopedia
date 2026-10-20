@@ -1,0 +1,165 @@
+<mxfile host="65bd71144e">
+    <diagram id="spymonk-architecture" name="SpyMonk Architecture">
+        <mxGraphModel dx="1099" dy="705" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1000" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="title" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=24;fontColor=#102A43;fontStyle=1;" value="&lt;b&gt;spyMonk Encyclopedia — Local Evidence-Grounded Research Architecture&lt;/b&gt;" vertex="1">
+                    <mxGeometry height="40" width="1030" x="285" y="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="subtitle" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=12;fontColor=#52616B;" value="React + FastAPI interface · Python research core · local evidence archive" vertex="1">
+                    <mxGeometry height="25" width="760" x="420" y="62" as="geometry"/>
+                </mxCell>
+                <mxCell id="user" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF7E6;strokeColor=#D97706;fontColor=#7C2D12;fontSize=14;" value="&lt;b&gt;Researcher&lt;/b&gt;&lt;br&gt;topic · PDF · question" vertex="1">
+                    <mxGeometry height="75" width="150" x="50" y="320" as="geometry"/>
+                </mxCell>
+                <mxCell id="react" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF1F0;strokeColor=#DE5833;fontColor=#7F1D1D;fontSize=14;" value="&lt;div&gt;&lt;b&gt;&lt;br&gt;&lt;/b&gt;&lt;/div&gt;&lt;b&gt;&lt;div&gt;&lt;b&gt;&lt;br&gt;&lt;/b&gt;&lt;/div&gt;&lt;div&gt;&lt;b&gt;&lt;br&gt;&lt;/b&gt;&lt;/div&gt;React + Vite UI&lt;/b&gt;&lt;br&gt;Research desk · PDF library&lt;br&gt;Evidence-backed chat" vertex="1">
+                    <mxGeometry height="135" width="190" x="280" y="290" as="geometry"/>
+                </mxCell>
+                <mxCell id="query" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAF3FF;strokeColor=#3776AB;fontColor=#102A43;fontSize=14;" value="&lt;b&gt;Query Controller&lt;/b&gt;&lt;br&gt;retrieve → re-check → answer" vertex="1">
+                    <mxGeometry height="75" width="230" x="707.5" y="577.5" as="geometry"/>
+                </mxCell>
+                <mxCell id="acquisition" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF7ED;strokeColor=#D97706;fontColor=#7C2D12;fontSize=13;" value="&lt;b&gt;Safe acquisition&lt;/b&gt;&lt;br&gt;HTTPX · redirects · size caps&lt;br&gt;Beautiful Soup · HTML snapshots&lt;br&gt;PyPDF · page extraction" vertex="1">
+                    <mxGeometry height="175" width="210" x="980" y="130" as="geometry"/>
+                </mxCell>
+                <mxCell id="validation" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F5F3FF;strokeColor=#7C3AED;fontColor=#3B0764;fontSize=13;" value="&lt;b&gt;Evidence validation&lt;/b&gt;&lt;br&gt;Verbatim quote match&lt;br&gt;Independent-origin support&lt;br&gt;Conflict review · PDF resolution" vertex="1">
+                    <mxGeometry height="175" width="235" x="1220" y="130" as="geometry"/>
+                </mxCell>
+                <mxCell id="llmIcon" parent="1" style="shape=image;imageAspect=0;aspect=fixed;image=https://cdn.simpleicons.org/openai/74AA9C;" value="" vertex="1">
+                    <mxGeometry height="45" width="45" x="810" y="395" as="geometry"/>
+                </mxCell>
+                <mxCell id="llm" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECFDF5;strokeColor=#10A37F;fontColor=#064E3B;fontSize=13;" value="&lt;b&gt;OpenAI-compatible LLM&lt;/b&gt;&lt;br&gt;LangChain · extraction&lt;br&gt;comparison · bounded answers" vertex="1">
+                    <mxGeometry height="80" width="200" x="540" y="450" as="geometry"/>
+                </mxCell>
+                <mxCell id="embedding" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECFEFF;strokeColor=#0891B2;fontColor=#164E63;fontSize=13;" value="&lt;b&gt;Embeddings&lt;/b&gt;&lt;br&gt;Hugging Face Sentence Transformers&lt;br&gt;or OpenAI embeddings" vertex="1">
+                    <mxGeometry height="80" width="200" x="1080" y="370" as="geometry"/>
+                </mxCell>
+                <mxCell id="chroma" parent="1" style="shape=cylinder;whiteSpace=wrap;html=1;fillColor=#EEF2FF;strokeColor=#4F46E5;fontColor=#312E81;fontSize=13;" value="&lt;b&gt;ChromaDB&lt;/b&gt;&lt;div&gt;&lt;b&gt;&lt;br&gt;&lt;/b&gt;&lt;/div&gt;&lt;div&gt;&lt;b&gt;&lt;br&gt;&lt;/b&gt;Local vector index&lt;br&gt;semantic retrieval&lt;/div&gt;" vertex="1">
+                    <mxGeometry height="100" width="170" x="1095" y="565" as="geometry"/>
+                </mxCell>
+                <mxCell id="json" parent="1" style="shape=note;whiteSpace=wrap;html=1;fillColor=#FFFBEB;strokeColor=#CA8A04;fontColor=#713F12;fontSize=13;" value="&lt;b&gt;JSON topic archive&lt;/b&gt;&lt;br&gt;claims · quotes · audit trail" vertex="1">
+                    <mxGeometry height="85" width="190" x="1370" y="360" as="geometry"/>
+                </mxCell>
+                <mxCell id="sources" parent="1" style="shape=folder;tabWidth=90;tabHeight=20;tabPosition=left;whiteSpace=wrap;html=1;fillColor=#F0FDFA;strokeColor=#0F766E;fontColor=#134E4A;fontSize=13;" value="&lt;b&gt;Local source snapshots&lt;/b&gt;&lt;br&gt;data/pdfs · web_pdfs · web_html" vertex="1">
+                    <mxGeometry height="85" width="210" x="980" y="725" as="geometry"/>
+                </mxCell>
+                <mxCell id="env" parent="1" style="shape=note;whiteSpace=wrap;html=1;fillColor=#F8FAFC;strokeColor=#64748B;fontColor=#334155;fontSize=13;" value="&lt;b&gt;.env + config.py&lt;/b&gt;&lt;br&gt;keys · model · limits" vertex="1">
+                    <mxGeometry height="75" width="190" x="727.5" y="360" as="geometry"/>
+                </mxCell>
+                <mxCell id="e1" edge="1" parent="1" source="user" style="endArrow=block;endFill=1;strokeWidth=2;strokeColor=#D97706;" target="react">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="e2" edge="1" parent="1" source="react" style="endArrow=block;endFill=1;strokeWidth=2;strokeColor=#009688;edgeStyle=orthogonalEdgeStyle;" target="fastapi">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="e3" edge="1" parent="1" source="fastapi" style="endArrow=block;endFill=1;strokeWidth=2;strokeColor=#3776AB;" target="query">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="e4" edge="1" parent="1" source="controller" style="endArrow=block;endFill=1;strokeWidth=2;strokeColor=#DE5833;" target="discovery">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="e5" edge="1" parent="1" source="discovery" style="endArrow=block;endFill=1;strokeWidth=2;strokeColor=#D97706;" target="acquisition">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="e6" edge="1" parent="1" source="acquisition" style="endArrow=block;endFill=1;strokeWidth=2;strokeColor=#7C3AED;" target="validation">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="e7" edge="1" parent="1" source="validation" style="endArrow=block;endFill=1;strokeWidth=2;strokeColor=#7C3AED;edgeStyle=orthogonalEdgeStyle;" target="embedding">
+                    <mxGeometry relative="1" x="0.1613" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="1330" y="410"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="e8" edge="1" parent="1" source="controller" style="endArrow=block;endFill=1;strokeWidth=2;strokeColor=#10A37F;edgeStyle=orthogonalEdgeStyle;" target="llm">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="640" y="330"/>
+                            <mxPoint x="640" y="330"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="e9" edge="1" parent="1" source="query" style="endArrow=block;endFill=1;strokeWidth=2;strokeColor=#10A37F;edgeStyle=orthogonalEdgeStyle;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" target="llm">
+                    <mxGeometry relative="1" x="-0.1326" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="830" y="560"/>
+                            <mxPoint x="640" y="560"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="e10" edge="1" parent="1" source="embedding" style="endArrow=block;endFill=1;strokeWidth=2;strokeColor=#4F46E5;" target="chroma">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="e11" edge="1" parent="1" source="query" style="endArrow=block;endFill=1;strokeWidth=2;strokeColor=#4F46E5;" target="chroma">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="e12" edge="1" parent="1" source="validation" style="endArrow=block;endFill=1;strokeWidth=2;strokeColor=#CA8A04;exitX=1;exitY=0.5;exitDx=0;exitDy=0;edgeStyle=orthogonalEdgeStyle;" target="json">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="e13" edge="1" parent="1" source="acquisition" style="endArrow=block;endFill=1;strokeWidth=2;strokeColor=#0F766E;edgeStyle=orthogonalEdgeStyle;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" target="sources">
+                    <mxGeometry relative="1" x="0.3928" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="1085" y="350"/>
+                            <mxPoint x="1020" y="350"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="e14" edge="1" parent="1" source="sources" style="endArrow=block;endFill=1;strokeWidth=2;strokeColor=#0F766E;edgeStyle=orthogonalEdgeStyle;" target="query">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="e15" edge="1" parent="1" source="env" style="endArrow=block;endFill=1;strokeWidth=1;strokeColor=#64748B;dashed=1;dashPattern=3 3;edgeStyle=orthogonalEdgeStyle;exitX=0;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;" target="controller">
+                    <mxGeometry relative="1" x="0.0889" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="660" y="397.5"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="e16" edge="1" parent="1" source="env" style="endArrow=block;endFill=1;strokeWidth=1;strokeColor=#64748B;dashed=1;dashPattern=3 3;edgeStyle=orthogonalEdgeStyle;" target="llm">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="830" y="490"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="e17" edge="1" parent="1" source="fastapi" style="endArrow=block;endFill=1;strokeWidth=2;strokeColor=#3776AB;edgeStyle=orthogonalEdgeStyle;" target="controller">
+                    <mxGeometry relative="1" x="-0.008" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="420" y="440"/>
+                            <mxPoint x="605" y="440"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="0yxFPY8HHKXcIR9pdDGn-1" connectable="0" parent="1" style="group" value="" vertex="1">
+                    <mxGeometry height="127.5" width="210" x="270" y="550" as="geometry"/>
+                </mxCell>
+                <mxCell id="fastapi" parent="0yxFPY8HHKXcIR9pdDGn-1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E7F6F2;strokeColor=#009688;fontColor=#134E4A;fontSize=14;" value="&lt;div&gt;&lt;b&gt;&lt;br&gt;&lt;/b&gt;&lt;/div&gt;&lt;b&gt;&lt;div&gt;&lt;b&gt;&lt;br&gt;&lt;/b&gt;&lt;/div&gt;local API&lt;/b&gt;&lt;br&gt;REST · upload · research · query" vertex="1">
+                    <mxGeometry height="127.5" width="210" as="geometry"/>
+                </mxCell>
+                <mxCell id="fastapiIcon" parent="0yxFPY8HHKXcIR9pdDGn-1" style="shape=image;imageAspect=0;aspect=fixed;image=https://cdn.simpleicons.org/fastapi/009688;" value="" vertex="1">
+                    <mxGeometry height="42" width="42" x="81" y="11.5" as="geometry"/>
+                </mxCell>
+                <mxCell id="reactIcon" parent="1" style="shape=image;imageAspect=0;aspect=fixed;image=https://cdn.simpleicons.org/react/61DAFB;" value="" vertex="1">
+                    <mxGeometry height="48" width="48" x="348" y="305" as="geometry"/>
+                </mxCell>
+                <mxCell id="0yxFPY8HHKXcIR9pdDGn-2" connectable="0" parent="1" style="group" value="" vertex="1">
+                    <mxGeometry height="145" width="190" x="760" y="140" as="geometry"/>
+                </mxCell>
+                <mxCell id="discovery" parent="0yxFPY8HHKXcIR9pdDGn-2" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF7ED;strokeColor=#DE5833;fontColor=#7C2D12;fontSize=14;" value="&lt;div&gt;&lt;b&gt;&lt;br&gt;&lt;/b&gt;&lt;/div&gt;&lt;b&gt;&lt;div&gt;&lt;b&gt;&lt;br&gt;&lt;/b&gt;&lt;/div&gt;&lt;div&gt;&lt;b&gt;&lt;br&gt;&lt;/b&gt;&lt;/div&gt;&lt;div&gt;&lt;b&gt;&lt;br&gt;&lt;/b&gt;&lt;/div&gt;Public discovery&lt;/b&gt;&lt;br&gt;DDGS bounded queries" vertex="1">
+                    <mxGeometry height="145" width="190" as="geometry"/>
+                </mxCell>
+                <mxCell id="7c4tuuBOH2v1UwlVPPMq-1" parent="0yxFPY8HHKXcIR9pdDGn-2" style="image;aspect=fixed;perimeter=ellipsePerimeter;html=1;align=center;shadow=0;dashed=0;spacingTop=3;image=img/lib/active_directory/internet_globe.svg;" value="" vertex="1">
+                    <mxGeometry height="50" width="50" x="70" y="15" as="geometry"/>
+                </mxCell>
+                <mxCell id="0yxFPY8HHKXcIR9pdDGn-3" connectable="0" parent="1" style="group" value="" vertex="1">
+                    <mxGeometry height="145" width="230" x="490" y="140" as="geometry"/>
+                </mxCell>
+                <mxCell id="controller" parent="0yxFPY8HHKXcIR9pdDGn-3" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAF3FF;strokeColor=#3776AB;fontColor=#102A43;fontSize=14;" value="&lt;div&gt;&lt;b&gt;&lt;br&gt;&lt;/b&gt;&lt;/div&gt;&lt;b&gt;&lt;div&gt;&lt;b&gt;&lt;br&gt;&lt;/b&gt;&lt;/div&gt;&lt;div&gt;&lt;b&gt;&lt;br&gt;&lt;/b&gt;&lt;/div&gt;&lt;div&gt;&lt;b&gt;&lt;br&gt;&lt;/b&gt;&lt;/div&gt;Python Research Controller&lt;/b&gt;&lt;br&gt;research.py · scraper.py · ingest.py" vertex="1">
+                    <mxGeometry height="145" width="230" as="geometry"/>
+                </mxCell>
+                <mxCell id="pyIcon" parent="0yxFPY8HHKXcIR9pdDGn-3" style="shape=image;imageAspect=0;aspect=fixed;image=https://cdn.simpleicons.org/python/3776AB;" value="" vertex="1">
+                    <mxGeometry height="45" width="45" x="92.5" y="20" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>

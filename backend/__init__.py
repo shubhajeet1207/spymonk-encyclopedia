@@ -1,0 +1,1 @@
+"""SpyMonk backend application package."""
