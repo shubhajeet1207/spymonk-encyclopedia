@@ -1,0 +1,154 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="600" viewBox="0 0 1600 600" role="img" aria-labelledby="title desc">
+  <title id="title">SpyMonk Encyclopedia — Build a research memory. Keep the evidence.</title>
+  <desc id="desc">A graphite and coral technical banner. Articles and reference PDFs connect to a cross-check node, a Chroma memory store, and a cited answer. The stack rail features React, Vite, Python, FastAPI, LangChain, and Vercel logos. All artwork is vector-based.</desc>
+  <!-- Stack logo paths: Simple Icons. Sources and attribution: assets/README.md. -->
+  <defs>
+    <linearGradient id="background" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#171427"/><stop offset="1" stop-color="#0d111d"/>
+    </linearGradient>
+    <radialGradient id="warm-light">
+      <stop stop-color="#f05b43" stop-opacity=".12"/><stop offset="1" stop-color="#f05b43" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="cool-light">
+      <stop stop-color="#83d5ce" stop-opacity=".08"/><stop offset="1" stop-color="#83d5ce" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="chip" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#4a2b36"/><stop offset="1" stop-color="#211e32"/>
+    </linearGradient>
+    <pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse">
+      <path d="M32 0H0V32" fill="none" stroke="#b9b3c9" stroke-opacity=".055"/>
+    </pattern>
+    <marker id="arrow-coral" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="m1 1 5 3-5 3" fill="none" stroke="#ef8d7b" stroke-width="1.4"/>
+    </marker>
+    <marker id="arrow-teal" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="m1 1 5 3-5 3" fill="none" stroke="#83d5ce" stroke-width="1.4"/>
+    </marker>
+    <symbol id="icon-react" viewBox="0 0 24 24">
+      <path d="M14.23 12.004a2.236 2.236 0 0 1-2.235 2.236 2.236 2.236 0 0 1-2.236-2.236 2.236 2.236 0 0 1 2.235-2.236 2.236 2.236 0 0 1 2.236 2.236zm2.648-10.69c-1.346 0-3.107.96-4.888 2.622-1.78-1.653-3.542-2.602-4.887-2.602-.41 0-.783.093-1.106.278-1.375.793-1.683 3.264-.973 6.365C1.98 8.917 0 10.42 0 12.004c0 1.59 1.99 3.097 5.043 4.03-.704 3.113-.39 5.588.988 6.38.32.187.69.275 1.102.275 1.345 0 3.107-.96 4.888-2.624 1.78 1.654 3.542 2.603 4.887 2.603.41 0 .783-.09 1.106-.275 1.374-.792 1.683-3.263.973-6.365C22.02 15.096 24 13.59 24 12.004c0-1.59-1.99-3.097-5.043-4.032.704-3.11.39-5.587-.988-6.38-.318-.184-.688-.277-1.092-.278zm-.005 1.09v.006c.225 0 .406.044.558.127.666.382.955 1.835.73 3.704-.054.46-.142.945-.25 1.44-.96-.236-2.006-.417-3.107-.534-.66-.905-1.345-1.727-2.035-2.447 1.592-1.48 3.087-2.292 4.105-2.295zm-9.77.02c1.012 0 2.514.808 4.11 2.28-.686.72-1.37 1.537-2.02 2.442-1.107.117-2.154.298-3.113.538-.112-.49-.195-.964-.254-1.42-.23-1.868.054-3.32.714-3.707.19-.09.4-.127.563-.132zm4.882 3.05c.455.468.91.992 1.36 1.564-.44-.02-.89-.034-1.345-.034-.46 0-.915.01-1.36.034.44-.572.895-1.096 1.345-1.565zM12 8.1c.74 0 1.477.034 2.202.093.406.582.802 1.203 1.183 1.86.372.64.71 1.29 1.018 1.946-.308.655-.646 1.31-1.013 1.95-.38.66-.773 1.288-1.18 1.87-.728.063-1.466.098-2.21.098-.74 0-1.477-.035-2.202-.093-.406-.582-.802-1.204-1.183-1.86-.372-.64-.71-1.29-1.018-1.946.303-.657.646-1.313 1.013-1.954.38-.66.773-1.286 1.18-1.868.728-.064 1.466-.098 2.21-.098zm-3.635.254c-.24.377-.48.763-.704 1.16-.225.39-.435.782-.635 1.174-.265-.656-.49-1.31-.676-1.947.64-.15 1.315-.283 2.015-.386zm7.26 0c.695.103 1.365.23 2.006.387-.18.632-.405 1.282-.66 1.933-.2-.39-.41-.783-.64-1.174-.225-.392-.465-.774-.705-1.146zm3.063.675c.484.15.944.317 1.375.498 1.732.74 2.852 1.708 2.852 2.476-.005.768-1.125 1.74-2.857 2.475-.42.18-.88.342-1.355.493-.28-.958-.646-1.956-1.1-2.98.45-1.017.81-2.01 1.085-2.964zm-13.395.004c.278.96.645 1.957 1.1 2.98-.45 1.017-.812 2.01-1.086 2.964-.484-.15-.944-.318-1.37-.5-1.732-.737-2.852-1.706-2.852-2.474 0-.768 1.12-1.742 2.852-2.476.42-.18.88-.342 1.356-.494zm11.678 4.28c.265.657.49 1.312.676 1.948-.64.157-1.316.29-2.016.39.24-.375.48-.762.705-1.158.225-.39.435-.788.636-1.18zm-9.945.02c.2.392.41.783.64 1.175.23.39.465.772.705 1.143-.695-.102-1.365-.23-2.006-.386.18-.63.406-1.282.66-1.933zM17.92 16.32c.112.493.2.968.254 1.423.23 1.868-.054 3.32-.714 3.708-.147.09-.338.128-.563.128-1.012 0-2.514-.807-4.11-2.28.686-.72 1.37-1.536 2.02-2.44 1.107-.118 2.154-.3 3.113-.54zm-11.83.01c.96.234 2.006.415 3.107.532.66.905 1.345 1.727 2.035 2.446-1.595 1.483-3.092 2.295-4.11 2.295-.22-.005-.406-.05-.553-.132-.666-.38-.955-1.834-.73-3.703.054-.46.142-.944.25-1.438zm4.56.64c.44.02.89.034 1.345.034.46 0 .915-.01 1.36-.034-.44.572-.895 1.095-1.345 1.565-.455-.47-.91-.993-1.36-1.565z"/>
+    </symbol>
+    <symbol id="icon-vite" viewBox="0 0 24 24">
+      <path d="M13.056 23.238a.57.57 0 0 1-1.02-.355v-5.202c0-.63-.512-1.143-1.144-1.143H5.148a.57.57 0 0 1-.464-.903l3.777-5.29c.54-.753 0-1.804-.93-1.804H.57a.574.574 0 0 1-.543-.746.6.6 0 0 1 .08-.157L5.008.78a.57.57 0 0 1 .467-.24h14.589a.57.57 0 0 1 .466.903l-3.778 5.29c-.54.755 0 1.806.93 1.806h5.745c.238 0 .424.138.513.322a.56.56 0 0 1-.063.603z"/>
+    </symbol>
+    <symbol id="icon-python" viewBox="0 0 24 24">
+      <path d="M14.25.18l.9.2.73.26.59.3.45.32.34.34.25.34.16.33.1.3.04.26.02.2-.01.13V8.5l-.05.63-.13.55-.21.46-.26.38-.3.31-.33.25-.35.19-.35.14-.33.1-.3.07-.26.04-.21.02H8.77l-.69.05-.59.14-.5.22-.41.27-.33.32-.27.35-.2.36-.15.37-.1.35-.07.32-.04.27-.02.21v3.06H3.17l-.21-.03-.28-.07-.32-.12-.35-.18-.36-.26-.36-.36-.35-.46-.32-.59-.28-.73-.21-.88-.14-1.05-.05-1.23.06-1.22.16-1.04.24-.87.32-.71.36-.57.4-.44.42-.33.42-.24.4-.16.36-.1.32-.05.24-.01h.16l.06.01h8.16v-.83H6.18l-.01-2.75-.02-.37.05-.34.11-.31.17-.28.25-.26.31-.23.38-.2.44-.18.51-.15.58-.12.64-.1.71-.06.77-.04.84-.02 1.27.05zm-6.3 1.98l-.23.33-.08.41.08.41.23.34.33.22.41.09.41-.09.33-.22.23-.34.08-.41-.08-.41-.23-.33-.33-.22-.41-.09-.41.09zm13.09 3.95l.28.06.32.12.35.18.36.27.36.35.35.47.32.59.28.73.21.88.14 1.04.05 1.23-.06 1.23-.16 1.04-.24.86-.32.71-.36.57-.4.45-.42.33-.42.24-.4.16-.36.09-.32.05-.24.02-.16-.01h-8.22v.82h5.84l.01 2.76.02.36-.05.34-.11.31-.17.29-.25.25-.31.24-.38.2-.44.17-.51.15-.58.13-.64.09-.71.07-.77.04-.84.01-1.27-.04-1.07-.14-.9-.2-.73-.25-.59-.3-.45-.33-.34-.34-.25-.34-.16-.33-.1-.3-.04-.25-.02-.2.01-.13v-5.34l.05-.64.13-.54.21-.46.26-.38.3-.32.33-.24.35-.2.35-.14.33-.1.3-.06.26-.04.21-.02.13-.01h5.84l.69-.05.59-.14.5-.21.41-.28.33-.32.27-.35.2-.36.15-.36.1-.35.07-.32.04-.28.02-.21V6.07h2.09l.14.01zm-6.47 14.25l-.23.33-.08.41.08.41.23.33.33.23.41.08.41-.08.33-.23.23-.33.08-.41-.08-.41-.23-.33-.33-.23-.41-.08-.41.08z"/>
+    </symbol>
+    <symbol id="icon-fastapi" viewBox="0 0 24 24">
+      <path d="M12 .0387C5.3729.0384.0003 5.3931 0 11.9988c-.001 6.6066 5.372 11.9628 12 11.9625 6.628.0003 12.001-5.3559 12-11.9625-.0003-6.6057-5.3729-11.9604-12-11.96m-.829 5.4153h7.55l-7.5805 5.3284h5.1828L5.279 18.5436q2.9466-6.5444 5.892-13.0896"/>
+    </symbol>
+    <symbol id="icon-langchain" viewBox="0 0 24 24">
+      <path d="M13.796 0a6.93 6.93 0 0 0-4.91 2.019L5.451 5.455l3.273 3.27 3.432-3.432a2.284 2.284 0 0 1 3.277 0 2.28 2.28 0 0 1 0 3.275L12 12.001l3.273 3.273 3.433-3.435c2.692-2.692 2.692-7.127 0-9.82A6.92 6.92 0 0 0 13.796 0m-5.07 8.728-3.433 3.434c-2.692 2.693-2.692 7.126 0 9.819A6.92 6.92 0 0 0 10.203 24a6.93 6.93 0 0 0 4.911-2.02l3.432-3.432-3.271-3.272-3.433 3.433a2.284 2.284 0 0 1-3.277 0 2.28 2.28 0 0 1 0-3.276L12 12z"/>
+    </symbol>
+    <symbol id="icon-vercel" viewBox="0 0 24 24">
+      <path d="m12 1.608 12 20.784H0Z"/>
+    </symbol>
+  </defs>
+
+  <rect width="1600" height="600" rx="24" fill="url(#background)"/>
+  <rect x="1" y="1" width="1598" height="598" rx="23" fill="url(#grid)" stroke="#373043"/>
+  <ellipse cx="1090" cy="190" rx="480" ry="330" fill="url(#warm-light)"/>
+  <ellipse cx="1400" cy="390" rx="200" ry="200" fill="url(#cool-light)"/>
+
+  <g font-family="'Segoe UI', Arial, sans-serif">
+    <!-- Wordmark and clear hierarchy remain legible at README display widths. -->
+    <g transform="translate(80 48)" stroke="#f5806a" stroke-width="2" fill="none" stroke-linejoin="round">
+      <path d="m0 12 16-9 16 9-16 9Z"/><path d="m0 21 16 9 16-9M0 30l16 9 16-9"/>
+    </g>
+    <text x="130" y="76" fill="#c5bccf" font-family="Consolas, monospace" font-size="16" letter-spacing="3">PERSONAL RESEARCH SYSTEM</text>
+    <text x="1520" y="76" text-anchor="end" fill="#b8afc4" font-family="Consolas, monospace" font-size="14" letter-spacing="2">MEMORY FIRST / EVIDENCE LED</text>
+
+    <text x="76" y="205" fill="#fff4e7" font-size="100" font-weight="700" letter-spacing="-5">SpyMonk</text>
+    <text x="81" y="269" fill="#f5806a" font-size="49" font-weight="400" letter-spacing="1">Encyclopedia</text>
+    <text x="82" y="337" fill="#fff4e7" font-size="28" font-weight="600">Build a research memory.</text>
+    <text x="82" y="375" fill="#bdb5cc" font-size="28">Keep the evidence.</text>
+
+    <g transform="translate(82 419)" font-family="Consolas, monospace" font-size="15">
+      <rect width="142" height="36" rx="8" fill="#252133" stroke="#494052"/>
+      <text x="71" y="24" text-anchor="middle" fill="#e4d9ec">PDF + WEB</text>
+      <rect x="156" width="98" height="36" rx="8" fill="#252133" stroke="#494052"/>
+      <text x="205" y="24" text-anchor="middle" fill="#e4d9ec">RAG</text>
+      <rect x="268" width="151" height="36" rx="8" fill="#252133" stroke="#494052"/>
+      <text x="343.5" y="24" text-anchor="middle" fill="#e4d9ec">CITATIONS</text>
+    </g>
+
+    <!-- An abstract web-research circuit, not a screenshot or a truth guarantee. -->
+    <g transform="translate(870 108)">
+      <g fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M160 90h32q16 0 16 16v58q0 16 16 16h16" stroke="#ef8d7b" marker-end="url(#arrow-coral)"/>
+        <path d="M160 270h32q16 0 16-16v-28q0-16 16-16h16" stroke="#ef8d7b" marker-end="url(#arrow-coral)"/>
+        <path d="M404 180h28q16 0 16-16V101q0-16 16-16h26" stroke="#83d5ce" marker-end="url(#arrow-teal)"/>
+        <path d="M570 140v90" stroke="#83d5ce" marker-end="url(#arrow-teal)"/>
+        <path d="M490 285h-30q-12 0-12 12v43q0 18-18 18H80q-16 0-16-16v-22" stroke="#6f657e" stroke-dasharray="5 8"/>
+      </g>
+      <circle cx="208" cy="135" r="4" fill="#f5806a"/>
+      <circle cx="448" cy="136" r="4" fill="#83d5ce"/>
+      <circle cx="570" cy="183" r="4" fill="#83d5ce"/>
+
+      <g transform="translate(0 40)">
+        <rect width="160" height="100" rx="14" fill="#211e30" stroke="#494052"/>
+        <g transform="translate(20 18)" fill="none" stroke="#d4c6e4" stroke-width="2" stroke-linecap="round">
+          <circle cx="17" cy="17" r="16"/><ellipse cx="17" cy="17" rx="7" ry="16"/>
+          <path d="M1 17h32M4 8h26M4 26h26"/>
+        </g>
+        <text x="20" y="78" fill="#e8dfea" font-family="Consolas, monospace" font-size="15">ARTICLES</text>
+        <text x="140" y="33" text-anchor="end" fill="#a79bb6" font-family="Consolas, monospace" font-size="12">01</text>
+      </g>
+
+      <g transform="translate(0 220)">
+        <rect width="160" height="100" rx="14" fill="#211e30" stroke="#494052"/>
+        <g transform="translate(22 14)" fill="none" stroke="#d4c6e4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M0 0h20l10 10v29H0Z"/><path d="M20 0v11h10M7 21h16M7 29h11"/>
+        </g>
+        <text x="20" y="78" fill="#e8dfea" font-family="Consolas, monospace" font-size="15">WEB PDFs</text>
+        <text x="140" y="33" text-anchor="end" fill="#a79bb6" font-family="Consolas, monospace" font-size="12">02</text>
+      </g>
+
+      <g transform="translate(240 130)">
+        <rect x="-8" y="-8" width="180" height="136" rx="24" fill="none" stroke="#f5806a" stroke-opacity=".16"/>
+        <rect width="164" height="120" rx="18" fill="url(#chip)" stroke="#ef8d7b" stroke-width="1.5"/>
+        <g transform="translate(62 17)" fill="none" stroke="#ffb09c" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+          <path d="m20 0 19 8v18c0 14-19 23-19 23S1 40 1 26V8Z"/><path d="m11 25 6 6 13-15"/>
+        </g>
+        <text x="82" y="87" text-anchor="middle" fill="#fff4e7" font-size="17" font-weight="600">Cross-check</text>
+        <text x="82" y="106" text-anchor="middle" fill="#e4b3ab" font-family="Consolas, monospace" font-size="11" letter-spacing="1">QUOTES + SOURCES</text>
+      </g>
+
+      <g transform="translate(490 30)">
+        <rect width="160" height="110" rx="14" fill="#18272e" stroke="#416068"/>
+        <g transform="translate(20 17)" fill="none" stroke="#83d5ce" stroke-width="2">
+          <ellipse cx="19" cy="6" rx="19" ry="6"/>
+          <path d="M0 6v27c0 8 38 8 38 0V6M0 19c0 8 38 8 38 0"/>
+        </g>
+        <text x="20" y="80" fill="#cbece5" font-size="17" font-weight="600">Memory</text>
+        <text x="20" y="98" fill="#9cbdbe" font-family="Consolas, monospace" font-size="11" letter-spacing="1">CHROMA + JSON</text>
+      </g>
+
+      <g transform="translate(490 230)">
+        <rect width="160" height="110" rx="14" fill="#1d2630" stroke="#416068"/>
+        <g transform="translate(20 17)" fill="none" stroke="#83d5ce" stroke-width="2" stroke-linecap="round">
+          <path d="M0 0h38v28H13l-8 7v-7H0Z"/><path d="M8 9h22M8 17h15"/>
+        </g>
+        <text x="20" y="79" fill="#cbece5" font-size="17" font-weight="600">Cited answer</text>
+        <text x="20" y="98" fill="#9cbdbe" font-family="Consolas, monospace" font-size="11" letter-spacing="1">RETRIEVE / EXPLAIN</text>
+      </g>
+    </g>
+
+    <!-- Embedded vector marks; no remote requests, raster images, or scripts. -->
+    <path d="M80 501h1440" stroke="#3a3347"/>
+    <text x="80" y="553" fill="#a79bb6" font-family="Consolas, monospace" font-size="13" letter-spacing="2">BUILT WITH</text>
+    <g font-size="19" font-weight="500">
+      <use href="#icon-react" x="270" y="525" width="38" height="38" fill="#61dafb"/>
+      <text x="322" y="551" fill="#e7dfed">React</text>
+      <use href="#icon-vite" x="463" y="526" width="34" height="34" fill="#c1a0ff"/>
+      <text x="511" y="551" fill="#e7dfed">Vite</text>
+      <use href="#icon-python" x="643" y="526" width="35" height="35" fill="#f2cb70"/>
+      <text x="692" y="551" fill="#e7dfed">Python</text>
+      <use href="#icon-fastapi" x="851" y="526" width="35" height="35" fill="#83d5ce"/>
+      <text x="900" y="551" fill="#e7dfed">FastAPI</text>
+      <use href="#icon-langchain" x="1074" y="526" width="35" height="35" fill="#b9dbca"/>
+      <text x="1123" y="551" fill="#e7dfed">LangChain</text>
+      <use href="#icon-vercel" x="1336" y="526" width="35" height="35" fill="#fff4e7"/>
+      <text x="1385" y="551" fill="#e7dfed">Vercel</text>
+    </g>
+  </g>
+</svg>
