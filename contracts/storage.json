@@ -1,0 +1,358 @@
+{
+  "backup_patterns": [
+    "memory/topics/*.json",
+    "memory/history/*.json",
+    "memory/unanswered/*.json",
+    "memory/attempts/*.json",
+    "data/pdfs/*.pdf",
+    "data/web_html/*",
+    "data/web_pdfs/*",
+    "logs/research/*.json"
+  ],
+  "index": {
+    "answerable_web_statuses": [
+      "corroborated",
+      "pdf_resolved"
+    ],
+    "eligibility_filter": {
+      "$or": [
+        {
+          "origin": "local_pdf"
+        },
+        {
+          "$and": [
+            {
+              "origin": "web"
+            },
+            {
+              "validation_status": {
+                "$in": [
+                  "corroborated",
+                  "pdf_resolved"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "evidence_statuses": [
+      "conflicted",
+      "corroborated",
+      "incomplete",
+      "local_source",
+      "pdf_resolved",
+      "single_source"
+    ],
+    "fingerprint": {
+      "spymonk_chunker": "hf:sentence-transformers/all-MiniLM-L6-v2:224/28:dedupe-v1",
+      "spymonk_embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+      "spymonk_embedding_provider": "huggingface",
+      "spymonk_schema": "2"
+    }
+  },
+  "research_run_log": {
+    "schema_version": 1,
+    "shape": {
+      "candidates": {
+        "cap": "int",
+        "cap_reached": "bool",
+        "count": "int",
+        "seeded_by_origin": "object",
+        "sources_available": "int",
+        "sources_reviewed": "int"
+      },
+      "claims": [
+        "object"
+      ],
+      "collection": {
+        "byte_budget": "int",
+        "bytes_downloaded": "int",
+        "html_pages": "int",
+        "pdf_links_found": "int",
+        "pdfs_downloaded": "int"
+      },
+      "configuration": {
+        "cross_check_batch_size": "int",
+        "llm_concurrency": "int",
+        "llm_max_retries": "int",
+        "llm_max_tokens": "int",
+        "llm_model": "str",
+        "llm_provider_host": "str",
+        "llm_temperature": "float",
+        "llm_timeout_seconds": "float",
+        "llm_top_p": "float",
+        "max_candidate_claims": "int",
+        "max_cross_checks_per_claim": "int",
+        "max_web_html": "int",
+        "max_web_pdfs": "int",
+        "min_independent_origins": "int",
+        "min_quote_chars": "int",
+        "research_max_fetch_bytes": "int",
+        "research_max_seconds": "int",
+        "source_text_for_analysis_chars": "int"
+      },
+      "created_at": "str",
+      "cross_checks": {
+        "calls": "array",
+        "malformed_replies": "int",
+        "verdicts": "object"
+      },
+      "diagnostics": [
+        "object"
+      ],
+      "events": [
+        "object"
+      ],
+      "failure_counts": {
+        "cross_check": "int",
+        "extraction": "int",
+        "source_read": "int"
+      },
+      "origin_diversity": {
+        "distinct_origins": "int",
+        "sources_per_origin": "object"
+      },
+      "outcome": {
+        "carried_over_claims": "int",
+        "held_back_claims": "int",
+        "inquiry_id": "null",
+        "reason": "str",
+        "status": "str",
+        "unresolved_claims": "int",
+        "verified_claims": "int"
+      },
+      "plan": {
+        "fallback_used": "bool",
+        "planner": "str",
+        "queries": "array"
+      },
+      "question": "str",
+      "report": "str",
+      "request_id": "str",
+      "schema_version": "int",
+      "search": {
+        "queries": "array",
+        "result_count": "int",
+        "results": "array"
+      },
+      "sources": [
+        "object"
+      ],
+      "started_at": "str",
+      "timings_ms": {
+        "search": "float",
+        "total": "float"
+      },
+      "topic_key": "str"
+    }
+  },
+  "topic_archive": {
+    "$defs": {
+      "ClaimRecord": {
+        "additionalProperties": true,
+        "description": "Minimum audit claim shape; extra provenance fields are preserved unchanged.",
+        "properties": {
+          "claim": {
+            "default": "",
+            "title": "Claim",
+            "type": "string"
+          },
+          "evidence": {
+            "items": {
+              "$ref": "#/$defs/EvidenceRecord"
+            },
+            "title": "Evidence",
+            "type": "array"
+          },
+          "id": {
+            "minLength": 1,
+            "title": "Id",
+            "type": "string"
+          },
+          "validation_status": {
+            "anyOf": [
+              {
+                "enum": [
+                  "local_source",
+                  "corroborated",
+                  "pdf_resolved",
+                  "single_source",
+                  "conflicted",
+                  "incomplete",
+                  "unknown"
+                ],
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Validation Status"
+          }
+        },
+        "required": [
+          "id"
+        ],
+        "title": "ClaimRecord",
+        "type": "object"
+      },
+      "EvidenceRecord": {
+        "additionalProperties": true,
+        "properties": {
+          "local_path": {
+            "default": "",
+            "title": "Local Path",
+            "type": "string"
+          },
+          "origin": {
+            "default": "",
+            "title": "Origin",
+            "type": "string"
+          },
+          "origin_key": {
+            "default": "",
+            "title": "Origin Key",
+            "type": "string"
+          },
+          "quote": {
+            "title": "Quote",
+            "type": "string"
+          },
+          "source_type": {
+            "default": "",
+            "title": "Source Type",
+            "type": "string"
+          },
+          "source_url": {
+            "default": "",
+            "title": "Source Url",
+            "type": "string"
+          },
+          "verdict": {
+            "enum": [
+              "supports",
+              "contradicts"
+            ],
+            "title": "Verdict",
+            "type": "string"
+          }
+        },
+        "required": [
+          "verdict",
+          "quote"
+        ],
+        "title": "EvidenceRecord",
+        "type": "object"
+      }
+    },
+    "additionalProperties": true,
+    "description": "Minimum valid audit shape; retain additional provenance fields unchanged.",
+    "properties": {
+      "claims": {
+        "items": {
+          "$ref": "#/$defs/ClaimRecord"
+        },
+        "title": "Claims",
+        "type": "array"
+      },
+      "index_state": {
+        "anyOf": [
+          {
+            "enum": [
+              "pending",
+              "indexed",
+              "stale"
+            ],
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Index State"
+      },
+      "topic": {
+        "minLength": 1,
+        "title": "Topic",
+        "type": "string"
+      },
+      "unresolved_claims": {
+        "items": {
+          "$ref": "#/$defs/ClaimRecord"
+        },
+        "title": "Unresolved Claims",
+        "type": "array"
+      }
+    },
+    "required": [
+      "topic",
+      "claims"
+    ],
+    "title": "TopicArchive",
+    "type": "object"
+  },
+  "unanswered_record": {
+    "schema_version": 1,
+    "shape": {
+      "claims": [
+        "object"
+      ],
+      "created_at": "str",
+      "developer": {
+        "candidates": "object",
+        "claims": "array",
+        "collection": "object",
+        "configuration": "object",
+        "cross_checks": "object",
+        "diagnostics": "array",
+        "events": "array",
+        "failure_counts": "object",
+        "origin_diversity": "object",
+        "plan": "object",
+        "search": "object",
+        "sources": "array",
+        "started_at": "str",
+        "timings_ms": "object"
+      },
+      "id": "str",
+      "outcome": {
+        "explanation": "str",
+        "failure_counts": "object",
+        "held_back_claims": "int",
+        "message": "str",
+        "previous_verified_claims": "int",
+        "reason": "str",
+        "reason_label": "str",
+        "status": "str",
+        "unresolved_claims": "int",
+        "verified_claims": "int"
+      },
+      "process": [
+        "object"
+      ],
+      "question": "str",
+      "request_id": "str",
+      "schema_version": "int",
+      "sources": [
+        "object"
+      ],
+      "suggestions": [
+        "str"
+      ],
+      "summary": {
+        "claims_found": "int",
+        "claims_verified": "int",
+        "duration_seconds": "float",
+        "independent_sites": "int",
+        "search_queries": "int",
+        "search_results": "int",
+        "sources_read": "int"
+      },
+      "topic_key": "str",
+      "topic_slug": "str"
+    }
+  }
+}

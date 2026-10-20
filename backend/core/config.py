@@ -13,7 +13,10 @@ from pathlib import Path
 from dotenv import load_dotenv
 
 ROOT_DIR = Path(__file__).resolve().parents[2]
-load_dotenv(ROOT_DIR / ".env")
+# SPYMONK_SKIP_DOTENV=1 ignores .env, so tools that must use the defaults
+# (the contract check) are not affected by local settings.
+if os.getenv("SPYMONK_SKIP_DOTENV") != "1":
+    load_dotenv(ROOT_DIR / ".env")
 
 
 def _env_str(name: str, default: str) -> str:

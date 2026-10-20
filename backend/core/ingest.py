@@ -136,7 +136,9 @@ def _parse_pdf_isolated(path: Path) -> list[tuple[int, str]]:
         str(MAX_PDF_PAGE_TEXT_BYTES),
     ]
     try:
-        worker = subprocess.Popen(
+        # A fixed argv (no shell): this interpreter in isolated mode, our own
+        # parser program, a staged file path, and numeric limits.
+        worker = subprocess.Popen(  # noqa: S603
             command,
             stdin=subprocess.DEVNULL,
             stdout=subprocess.PIPE,
