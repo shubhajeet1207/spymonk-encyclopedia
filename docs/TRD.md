@@ -451,7 +451,16 @@ Local mode keeps vectors under `chroma_db/` (`VECTOR_STORE_PROVIDER=chroma-local
 - **Backend unit and integration tests** (`python -m unittest discover -s tests`) cover the evidence rules, save outcomes, partial saves, unanswered records and both reports (including a Devanagari line-wrap regression and the no-font fallback), job lifecycle, rate and spend limits, fetch safety, index lifecycle, and the API contracts. They use temporary data directories and mocked providers. Running the suite with `SPYMONK_DATA_DIR` set to an empty directory leaves it empty, which shows no test touches a real index or log.
 - **Frontend tests** (`npm --prefix frontend test`) cover the API client, pipeline state, and outcome messages; `npm --prefix frontend run build` must succeed.
 - **Live replay** of saved snapshots against the real model is the tool for diagnosing provider behavior and qualifying models (§9.3). It runs with a scratch data directory and never writes to the live archive.
-- **CI** (`.github/workflows/ci.yml`) runs the same checks plus `pip-audit` and `npm audit`. Dependencies are pinned in `constraints.txt`.
+- **Lint:** `ruff` (syntax, pyflakes, bugbear, bandit security rules) and ESLint (recommended and React hooks rules).
+- **Contract check:** `scripts/check_contracts.py` snapshots the stored formats (topic-audit schema, unanswered-record and run-log shapes, index fingerprint, evidence vocabulary, backup patterns) and the OpenAPI document in `contracts/`. Any unintended change fails CI.
+- **CI** (`.github/workflows/ci.yml`, ADR-031) runs on every pull request to `main`:
+  - repository policy, documentation links, and a gitleaks secret scan of the whole history;
+  - lint, tests with an 83% coverage floor and a data-directory isolation check, and the contract check;
+  - frontend lint, tests, and build;
+  - `pip-audit` on the pinned versions and `npm audit`;
+  - a container build and smoke test.
+  
+  **CI passed** is the single required check. `.github/workflows/deploy.yml` deploys `main` to the Space after CI passes. Details in [CI_CD.md](CI_CD.md).
 
 ## 16. Acceptance criteria
 

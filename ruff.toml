@@ -1,0 +1,20 @@
+# Lint gate run in CI (.github/workflows/ci.yml). The rules catch real
+# defects and security issues; formatting is not enforced.
+target-version = "py311"
+extend-exclude = ["frontend", "logs", "data", "memory", "chroma_db"]
+
+[lint]
+select = [
+    "E9",  # syntax errors
+    "F",   # pyflakes: undefined names, unused imports and variables
+    "B",   # bugbear: likely bugs
+    "S",   # bandit: security issues
+]
+ignore = [
+    "B008",  # FastAPI's Depends()/File() defaults are the framework's idiom.
+    "B905",  # zip() without strict= is intentional here.
+]
+
+[lint.per-file-ignores]
+# Tests use fixed fake secrets, local subprocesses, and local binds.
+"tests/**" = ["S"]
