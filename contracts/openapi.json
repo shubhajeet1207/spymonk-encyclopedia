@@ -1,0 +1,1717 @@
+{
+  "components": {
+    "schemas": {
+      "AskArchiveSummary": {
+        "properties": {
+          "claims_count": {
+            "title": "Claims Count",
+            "type": "integer"
+          },
+          "inquiry_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Inquiry Id"
+          },
+          "memory_updated": {
+            "default": false,
+            "title": "Memory Updated",
+            "type": "boolean"
+          },
+          "outcome_explanation": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Outcome Explanation"
+          },
+          "outcome_message": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Outcome Message"
+          },
+          "topic": {
+            "title": "Topic",
+            "type": "string"
+          },
+          "unresolved_count": {
+            "title": "Unresolved Count",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "topic",
+          "claims_count",
+          "unresolved_count"
+        ],
+        "title": "AskArchiveSummary",
+        "type": "object"
+      },
+      "AskRequest": {
+        "properties": {
+          "question": {
+            "maxLength": 2000,
+            "minLength": 1,
+            "title": "Question",
+            "type": "string"
+          },
+          "research_on_miss": {
+            "default": false,
+            "title": "Research On Miss",
+            "type": "boolean"
+          },
+          "reverify": {
+            "default": true,
+            "title": "Reverify",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "question"
+        ],
+        "title": "AskRequest",
+        "type": "object"
+      },
+      "AskResponse": {
+        "properties": {
+          "answer": {
+            "title": "Answer",
+            "type": "string"
+          },
+          "archive": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/AskArchiveSummary"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "researched": {
+            "default": false,
+            "title": "Researched",
+            "type": "boolean"
+          },
+          "sources": {
+            "items": {
+              "$ref": "#/components/schemas/EvidenceSource"
+            },
+            "title": "Sources",
+            "type": "array"
+          }
+        },
+        "required": [
+          "answer"
+        ],
+        "title": "AskResponse",
+        "type": "object"
+      },
+      "Body_add_documents_api_documents_post": {
+        "properties": {
+          "files": {
+            "items": {
+              "contentMediaType": "application/octet-stream",
+              "type": "string"
+            },
+            "title": "Files",
+            "type": "array"
+          }
+        },
+        "required": [
+          "files"
+        ],
+        "title": "Body_add_documents_api_documents_post",
+        "type": "object"
+      },
+      "ClaimSummary": {
+        "properties": {
+          "claim": {
+            "title": "Claim",
+            "type": "string"
+          },
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "supporting_origins": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Supporting Origins",
+            "type": "array"
+          }
+        },
+        "required": [
+          "id",
+          "claim"
+        ],
+        "title": "ClaimSummary",
+        "type": "object"
+      },
+      "ClearMemoryResponse": {
+        "properties": {
+          "cleared": {
+            "title": "Cleared",
+            "type": "boolean"
+          },
+          "message": {
+            "title": "Message",
+            "type": "string"
+          }
+        },
+        "required": [
+          "cleared",
+          "message"
+        ],
+        "title": "ClearMemoryResponse",
+        "type": "object"
+      },
+      "DocumentsResponse": {
+        "properties": {
+          "chunk_count": {
+            "title": "Chunk Count",
+            "type": "integer"
+          },
+          "duplicates": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Duplicates",
+            "type": "array"
+          },
+          "file_count": {
+            "title": "File Count",
+            "type": "integer"
+          },
+          "files": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Files",
+            "type": "array"
+          },
+          "index_exists": {
+            "title": "Index Exists",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "files",
+          "file_count",
+          "chunk_count",
+          "index_exists"
+        ],
+        "title": "DocumentsResponse",
+        "type": "object"
+      },
+      "EvidenceSource": {
+        "properties": {
+          "evidence": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "title": "Evidence",
+            "type": "array"
+          },
+          "excerpt": {
+            "default": "",
+            "title": "Excerpt",
+            "type": "string"
+          },
+          "origin": {
+            "default": "",
+            "title": "Origin",
+            "type": "string"
+          },
+          "page": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Page"
+          },
+          "source": {
+            "default": "unknown",
+            "title": "Source",
+            "type": "string"
+          },
+          "supporting_origins": {
+            "default": "",
+            "title": "Supporting Origins",
+            "type": "string"
+          },
+          "url": {
+            "default": "",
+            "title": "Url",
+            "type": "string"
+          },
+          "validation_status": {
+            "default": "",
+            "title": "Validation Status",
+            "type": "string"
+          },
+          "verified": {
+            "default": "",
+            "title": "Verified",
+            "type": "string"
+          }
+        },
+        "title": "EvidenceSource",
+        "type": "object"
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "title": "Detail",
+            "type": "array"
+          }
+        },
+        "title": "HTTPValidationError",
+        "type": "object"
+      },
+      "InquiriesResponse": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/InquirySummary"
+            },
+            "title": "Items",
+            "type": "array"
+          }
+        },
+        "required": [
+          "items"
+        ],
+        "title": "InquiriesResponse",
+        "type": "object"
+      },
+      "InquirySummary": {
+        "properties": {
+          "claims_found": {
+            "default": 0,
+            "title": "Claims Found",
+            "type": "integer"
+          },
+          "created_at": {
+            "title": "Created At",
+            "type": "string"
+          },
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "question": {
+            "title": "Question",
+            "type": "string"
+          },
+          "reason": {
+            "title": "Reason",
+            "type": "string"
+          },
+          "reason_label": {
+            "title": "Reason Label",
+            "type": "string"
+          },
+          "sources_read": {
+            "default": 0,
+            "title": "Sources Read",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "id",
+          "question",
+          "created_at",
+          "reason",
+          "reason_label"
+        ],
+        "title": "InquirySummary",
+        "type": "object"
+      },
+      "JobError": {
+        "properties": {
+          "message": {
+            "title": "Message",
+            "type": "string"
+          },
+          "status": {
+            "title": "Status",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "status",
+          "message"
+        ],
+        "title": "JobError",
+        "type": "object"
+      },
+      "ReindexPlanResponse": {
+        "properties": {
+          "answerable_claims": {
+            "title": "Answerable Claims",
+            "type": "integer"
+          },
+          "duplicate_pdfs": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Duplicate Pdfs",
+            "type": "array"
+          },
+          "index_state": {
+            "title": "Index State",
+            "type": "string"
+          },
+          "pdfs": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Pdfs",
+            "type": "array"
+          },
+          "topics": {
+            "title": "Topics",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "pdfs",
+          "duplicate_pdfs",
+          "topics",
+          "answerable_claims",
+          "index_state"
+        ],
+        "title": "ReindexPlanResponse",
+        "type": "object"
+      },
+      "ReindexResponse": {
+        "properties": {
+          "claims": {
+            "title": "Claims",
+            "type": "integer"
+          },
+          "documents": {
+            "title": "Documents",
+            "type": "integer"
+          },
+          "duplicate_pdfs": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Duplicate Pdfs",
+            "type": "array"
+          },
+          "indexed_pdfs": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Indexed Pdfs",
+            "type": "array"
+          },
+          "skipped_pdfs": {
+            "items": {
+              "$ref": "#/components/schemas/SkippedPdf"
+            },
+            "title": "Skipped Pdfs",
+            "type": "array"
+          },
+          "topics": {
+            "title": "Topics",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "indexed_pdfs",
+          "skipped_pdfs",
+          "duplicate_pdfs",
+          "topics",
+          "claims",
+          "documents"
+        ],
+        "title": "ReindexResponse",
+        "type": "object"
+      },
+      "ResearchArchive": {
+        "properties": {
+          "carried_over_claims": {
+            "default": 0,
+            "title": "Carried Over Claims",
+            "type": "integer"
+          },
+          "claims": {
+            "items": {
+              "$ref": "#/components/schemas/ClaimSummary"
+            },
+            "title": "Claims",
+            "type": "array"
+          },
+          "failure_reason": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Failure Reason"
+          },
+          "held_back_claims": {
+            "default": 0,
+            "title": "Held Back Claims",
+            "type": "integer"
+          },
+          "inquiry_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Inquiry Id"
+          },
+          "memory_updated": {
+            "default": false,
+            "title": "Memory Updated",
+            "type": "boolean"
+          },
+          "outcome_explanation": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Outcome Explanation"
+          },
+          "outcome_message": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Outcome Message"
+          },
+          "previous_verified_claims": {
+            "default": 0,
+            "title": "Previous Verified Claims",
+            "type": "integer"
+          },
+          "sources": {
+            "items": {
+              "$ref": "#/components/schemas/ResearchSource"
+            },
+            "title": "Sources",
+            "type": "array"
+          },
+          "topic": {
+            "title": "Topic",
+            "type": "string"
+          },
+          "unresolved_claims": {
+            "items": {
+              "$ref": "#/components/schemas/UnresolvedClaim"
+            },
+            "title": "Unresolved Claims",
+            "type": "array"
+          }
+        },
+        "required": [
+          "topic"
+        ],
+        "title": "ResearchArchive",
+        "type": "object"
+      },
+      "ResearchJobResponse": {
+        "properties": {
+          "created_at": {
+            "title": "Created At",
+            "type": "number"
+          },
+          "error": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/JobError"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "event_count": {
+            "default": 0,
+            "title": "Event Count",
+            "type": "integer"
+          },
+          "existing": {
+            "default": false,
+            "title": "Existing",
+            "type": "boolean"
+          },
+          "finished_at": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Finished At"
+          },
+          "job_id": {
+            "title": "Job Id",
+            "type": "string"
+          },
+          "result": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ResearchResponse"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "started_at": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Started At"
+          },
+          "status": {
+            "enum": [
+              "queued",
+              "running",
+              "succeeded",
+              "failed",
+              "cancelled"
+            ],
+            "title": "Status",
+            "type": "string"
+          },
+          "topic": {
+            "title": "Topic",
+            "type": "string"
+          }
+        },
+        "required": [
+          "job_id",
+          "topic",
+          "status",
+          "created_at"
+        ],
+        "title": "ResearchJobResponse",
+        "type": "object"
+      },
+      "ResearchRequest": {
+        "properties": {
+          "refresh": {
+            "default": false,
+            "title": "Refresh",
+            "type": "boolean"
+          },
+          "reverify": {
+            "default": true,
+            "title": "Reverify",
+            "type": "boolean"
+          },
+          "search_queries": {
+            "items": {
+              "type": "string"
+            },
+            "maxItems": 6,
+            "title": "Search Queries",
+            "type": "array"
+          },
+          "topic": {
+            "maxLength": 500,
+            "minLength": 1,
+            "title": "Topic",
+            "type": "string"
+          }
+        },
+        "required": [
+          "topic"
+        ],
+        "title": "ResearchRequest",
+        "type": "object"
+      },
+      "ResearchResponse": {
+        "properties": {
+          "answer": {
+            "title": "Answer",
+            "type": "string"
+          },
+          "archive": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ResearchArchive"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "cached": {
+            "title": "Cached",
+            "type": "boolean"
+          },
+          "progress": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Progress",
+            "type": "array"
+          },
+          "search_plan": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/SearchPlanSummary"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "sources": {
+            "items": {
+              "$ref": "#/components/schemas/EvidenceSource"
+            },
+            "title": "Sources",
+            "type": "array"
+          }
+        },
+        "required": [
+          "cached",
+          "answer"
+        ],
+        "title": "ResearchResponse",
+        "type": "object"
+      },
+      "ResearchSource": {
+        "properties": {
+          "origin": {
+            "title": "Origin",
+            "type": "string"
+          },
+          "source_type": {
+            "title": "Source Type",
+            "type": "string"
+          },
+          "title": {
+            "title": "Title",
+            "type": "string"
+          },
+          "url": {
+            "title": "Url",
+            "type": "string"
+          }
+        },
+        "required": [
+          "url",
+          "title",
+          "source_type",
+          "origin"
+        ],
+        "title": "ResearchSource",
+        "type": "object"
+      },
+      "SearchPlanRequest": {
+        "properties": {
+          "topic": {
+            "maxLength": 500,
+            "minLength": 1,
+            "title": "Topic",
+            "type": "string"
+          }
+        },
+        "required": [
+          "topic"
+        ],
+        "title": "SearchPlanRequest",
+        "type": "object"
+      },
+      "SearchPlanResponse": {
+        "properties": {
+          "fallback_used": {
+            "default": false,
+            "title": "Fallback Used",
+            "type": "boolean"
+          },
+          "planner": {
+            "enum": [
+              "llm",
+              "baseline-fallback",
+              "provided"
+            ],
+            "title": "Planner",
+            "type": "string"
+          },
+          "queries": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Queries",
+            "type": "array"
+          },
+          "topic": {
+            "title": "Topic",
+            "type": "string"
+          }
+        },
+        "required": [
+          "queries",
+          "planner",
+          "topic"
+        ],
+        "title": "SearchPlanResponse",
+        "type": "object"
+      },
+      "SearchPlanSummary": {
+        "properties": {
+          "fallback_used": {
+            "default": false,
+            "title": "Fallback Used",
+            "type": "boolean"
+          },
+          "planner": {
+            "enum": [
+              "llm",
+              "baseline-fallback",
+              "provided"
+            ],
+            "title": "Planner",
+            "type": "string"
+          },
+          "queries": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Queries",
+            "type": "array"
+          }
+        },
+        "required": [
+          "queries",
+          "planner"
+        ],
+        "title": "SearchPlanSummary",
+        "type": "object"
+      },
+      "SkippedPdf": {
+        "properties": {
+          "file": {
+            "title": "File",
+            "type": "string"
+          },
+          "reason": {
+            "title": "Reason",
+            "type": "string"
+          }
+        },
+        "required": [
+          "file",
+          "reason"
+        ],
+        "title": "SkippedPdf",
+        "type": "object"
+      },
+      "StatusResponse": {
+        "properties": {
+          "api_online": {
+            "title": "Api Online",
+            "type": "boolean"
+          },
+          "embedding_model": {
+            "title": "Embedding Model",
+            "type": "string"
+          },
+          "embedding_provider": {
+            "title": "Embedding Provider",
+            "type": "string"
+          },
+          "index_exists": {
+            "title": "Index Exists",
+            "type": "boolean"
+          },
+          "index_message": {
+            "default": "",
+            "title": "Index Message",
+            "type": "string"
+          },
+          "index_rebuild_recommended": {
+            "default": false,
+            "title": "Index Rebuild Recommended",
+            "type": "boolean"
+          },
+          "index_state": {
+            "default": "missing",
+            "enum": [
+              "missing",
+              "ok",
+              "legacy",
+              "stale",
+              "mismatch"
+            ],
+            "title": "Index State",
+            "type": "string"
+          },
+          "indexed_pdf_count": {
+            "title": "Indexed Pdf Count",
+            "type": "integer"
+          },
+          "llm_configured": {
+            "title": "Llm Configured",
+            "type": "boolean"
+          },
+          "llm_model": {
+            "title": "Llm Model",
+            "type": "string"
+          },
+          "local_pdf_count": {
+            "title": "Local Pdf Count",
+            "type": "integer"
+          },
+          "max_pdf_bytes": {
+            "title": "Max Pdf Bytes",
+            "type": "integer"
+          },
+          "topic_count": {
+            "title": "Topic Count",
+            "type": "integer"
+          },
+          "vector_store_provider": {
+            "title": "Vector Store Provider",
+            "type": "string"
+          }
+        },
+        "required": [
+          "api_online",
+          "llm_configured",
+          "llm_model",
+          "embedding_provider",
+          "embedding_model",
+          "vector_store_provider",
+          "index_exists",
+          "topic_count",
+          "local_pdf_count",
+          "indexed_pdf_count",
+          "max_pdf_bytes"
+        ],
+        "title": "StatusResponse",
+        "type": "object"
+      },
+      "TopicSummary": {
+        "properties": {
+          "claims": {
+            "title": "Claims",
+            "type": "integer"
+          },
+          "index_state": {
+            "anyOf": [
+              {
+                "enum": [
+                  "pending",
+                  "indexed",
+                  "stale"
+                ],
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Index State"
+          },
+          "indexed_claims": {
+            "default": 0,
+            "title": "Indexed Claims",
+            "type": "integer"
+          },
+          "topic": {
+            "title": "Topic",
+            "type": "string"
+          }
+        },
+        "required": [
+          "topic",
+          "claims"
+        ],
+        "title": "TopicSummary",
+        "type": "object"
+      },
+      "TopicsResponse": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/TopicSummary"
+            },
+            "title": "Items",
+            "type": "array"
+          }
+        },
+        "required": [
+          "items"
+        ],
+        "title": "TopicsResponse",
+        "type": "object"
+      },
+      "UnresolvedClaim": {
+        "properties": {
+          "claim": {
+            "title": "Claim",
+            "type": "string"
+          },
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "validation_status": {
+            "enum": [
+              "local_source",
+              "corroborated",
+              "pdf_resolved",
+              "single_source",
+              "conflicted",
+              "incomplete",
+              "unknown"
+            ],
+            "title": "Validation Status",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "claim",
+          "validation_status"
+        ],
+        "title": "UnresolvedClaim",
+        "type": "object"
+      },
+      "ValidationError": {
+        "properties": {
+          "ctx": {
+            "title": "Context",
+            "type": "object"
+          },
+          "input": {
+            "title": "Input"
+          },
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "title": "Location",
+            "type": "array"
+          },
+          "msg": {
+            "title": "Message",
+            "type": "string"
+          },
+          "type": {
+            "title": "Error Type",
+            "type": "string"
+          }
+        },
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError",
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "description": "Research, evidence-bounded answers, and PDF ingestion.",
+    "title": "SpyMonk Encyclopedia API",
+    "version": "2.3.0"
+  },
+  "openapi": "3.1.0",
+  "paths": {
+    "/api/ask": {
+      "post": {
+        "operationId": "ask_archive_api_ask_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AskRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AskResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Ask Archive",
+        "tags": [
+          "answers"
+        ]
+      }
+    },
+    "/api/documents": {
+      "post": {
+        "operationId": "add_documents_api_documents_post",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_add_documents_api_documents_post"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DocumentsResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Add Documents",
+        "tags": [
+          "documents"
+        ]
+      }
+    },
+    "/api/health": {
+      "get": {
+        "operationId": "health_api_health_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": {
+                    "type": "string"
+                  },
+                  "title": "Response Health Api Health Get",
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Health",
+        "tags": [
+          "system"
+        ]
+      }
+    },
+    "/api/inquiries": {
+      "get": {
+        "operationId": "list_unanswered_questions_api_inquiries_get",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "default": 50,
+              "maximum": 200,
+              "minimum": 1,
+              "title": "Limit",
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InquiriesResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "List Unanswered Questions",
+        "tags": [
+          "inquiries"
+        ]
+      }
+    },
+    "/api/inquiries/{inquiry_id}/developer-log": {
+      "get": {
+        "description": "The technical trace and diagnostics for improving the pipeline.",
+        "operationId": "download_developer_log_api_inquiries__inquiry_id__developer_log_get",
+        "parameters": [
+          {
+            "description": "Unanswered-question record ID",
+            "in": "path",
+            "name": "inquiry_id",
+            "required": true,
+            "schema": {
+              "description": "Unanswered-question record ID",
+              "pattern": "^\\d{14}[0-9a-f]{16}$",
+              "title": "Inquiry Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Download Developer Log",
+        "tags": [
+          "inquiries"
+        ]
+      }
+    },
+    "/api/inquiries/{inquiry_id}/report.pdf": {
+      "get": {
+        "description": "The plain-language report for the person who asked.",
+        "operationId": "download_report_api_inquiries__inquiry_id__report_pdf_get",
+        "parameters": [
+          {
+            "description": "Unanswered-question record ID",
+            "in": "path",
+            "name": "inquiry_id",
+            "required": true,
+            "schema": {
+              "description": "Unanswered-question record ID",
+              "pattern": "^\\d{14}[0-9a-f]{16}$",
+              "title": "Inquiry Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Download Report",
+        "tags": [
+          "inquiries"
+        ]
+      }
+    },
+    "/api/memory": {
+      "delete": {
+        "operationId": "clear_memory_api_memory_delete",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ClearMemoryResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Clear Memory",
+        "tags": [
+          "memory"
+        ]
+      }
+    },
+    "/api/memory/reindex": {
+      "get": {
+        "description": "What a rebuild would index, without changing anything.",
+        "operationId": "reindex_plan_api_memory_reindex_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReindexPlanResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Reindex Plan",
+        "tags": [
+          "memory"
+        ]
+      },
+      "post": {
+        "description": "Rebuild the vector index from audit files and stored PDFs, then swap it in.",
+        "operationId": "reindex_api_memory_reindex_post",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReindexResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Reindex",
+        "tags": [
+          "memory"
+        ]
+      }
+    },
+    "/api/research": {
+      "post": {
+        "description": "Run research and wait for the result (for clients that cannot stream).",
+        "operationId": "research_api_research_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ResearchRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResearchResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Research",
+        "tags": [
+          "research"
+        ]
+      }
+    },
+    "/api/research/jobs": {
+      "post": {
+        "description": "Start research in the background; watch it with the events endpoint.",
+        "operationId": "create_research_job_api_research_jobs_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ResearchRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "202": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResearchJobResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Create Research Job",
+        "tags": [
+          "research"
+        ]
+      }
+    },
+    "/api/research/jobs/{job_id}": {
+      "delete": {
+        "operationId": "cancel_research_job_api_research_jobs__job_id__delete",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "job_id",
+            "required": true,
+            "schema": {
+              "title": "Job Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResearchJobResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Cancel Research Job",
+        "tags": [
+          "research"
+        ]
+      },
+      "get": {
+        "operationId": "get_research_job_api_research_jobs__job_id__get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "job_id",
+            "required": true,
+            "schema": {
+              "title": "Job Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResearchJobResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Get Research Job",
+        "tags": [
+          "research"
+        ]
+      }
+    },
+    "/api/research/jobs/{job_id}/events": {
+      "get": {
+        "description": "Replay and follow a job's events; disconnecting does not cancel the job.",
+        "operationId": "research_job_events_api_research_jobs__job_id__events_get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "job_id",
+            "required": true,
+            "schema": {
+              "title": "Job Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "after",
+            "required": false,
+            "schema": {
+              "default": 0,
+              "minimum": 0,
+              "title": "After",
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Research Job Events",
+        "tags": [
+          "research"
+        ]
+      }
+    },
+    "/api/research/plan": {
+      "post": {
+        "description": "Call the LLM for search-query planning without fetching web sources.",
+        "operationId": "create_search_plan_api_research_plan_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SearchPlanRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SearchPlanResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Create Search Plan",
+        "tags": [
+          "research"
+        ]
+      }
+    },
+    "/api/research/stream": {
+      "post": {
+        "description": "Start research and stream its stages; closing the stream cancels the job.",
+        "operationId": "research_stream_api_research_stream_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ResearchRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Research Stream",
+        "tags": [
+          "research"
+        ]
+      }
+    },
+    "/api/status": {
+      "get": {
+        "operationId": "status_api_status_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StatusResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Status",
+        "tags": [
+          "system"
+        ]
+      }
+    },
+    "/api/topics": {
+      "get": {
+        "operationId": "topics_api_topics_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TopicsResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Topics",
+        "tags": [
+          "system"
+        ]
+      }
+    }
+  }
+}

@@ -141,12 +141,15 @@ For the development dependency set and checks:
 
 ```powershell
 .\.venv\Scripts\python.exe -m pip install -r requirements-dev.txt -c constraints.txt
+.\.venv\Scripts\python.exe -m ruff check .
 .\.venv\Scripts\python.exe -m unittest discover -s tests -t .
+.\.venv\Scripts\python.exe scripts\check_contracts.py
+npm --prefix frontend run lint
 npm --prefix frontend test
 npm --prefix frontend run build
 ```
 
-The [CI workflow](../../.github/workflows/ci.yml) defines backend tests, frontend tests/build, and dependency audits. It runs automatically only after this repository is hosted with that workflow enabled.
+Every pull request to `main` runs these and more (secret scan, dependency audit, container build) in GitHub Actions. See [CI/CD](../CI_CD.md) for the full list and for the one-time repository settings.
 
 ## Maintenance and troubleshooting
 

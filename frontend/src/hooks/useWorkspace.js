@@ -12,11 +12,15 @@ export function useWorkspace({ onAccessDenied } = {}) {
   const [topics, setTopics] = useState([])
   const [inquiries, setInquiries] = useState([])
   const [accessState, setAccessState] = useState('checking')
-  const [offlineRound, setOfflineRound] = useState(0)
-  const [retryIn, setRetryIn] = useState(0)
+  // While offline: which retry this is and when it is due; `now` ticks the countdown.
+  const [retry, setRetry] = useState(null)
+  const [now, setNow] = useState(0)
   const epoch = useRef(0)
   const deniedHandler = useRef(onAccessDenied)
-  deniedHandler.current = onAccessDenied
+
+  useEffect(() => {
+    deniedHandler.current = onAccessDenied
+  }, [onAccessDenied])
 
   /** Reload status and topics; throws so callers can report failures. */
   const refresh = useCallback(async () => {
@@ -35,7 +39,7 @@ export function useWorkspace({ onAccessDenied } = {}) {
     setTopics(nextTopics.items || [])
     setInquiries(nextInquiries.items || [])
     setAccessState('ready')
-    setOfflineRound(0)
+    setRetry(null)
   }, [])
 
   /** Reload, classifying failures; returns the error (or null). */
@@ -48,8 +52,13 @@ export function useWorkspace({ onAccessDenied } = {}) {
         setAccessState('required')
         deniedHandler.current?.(error)
       } else {
+        const failedAt = Date.now()
         setAccessState('offline')
-        setOfflineRound((round) => round + 1)
+        setNow(failedAt)
+        setRetry((current) => {
+          const round = (current?.round || 0) + 1
+          return { round, due: failedAt + backoffDelay(round, { base: 2000, max: 60000 }) }
+        })
       }
       return error
     }
@@ -64,24 +73,22 @@ export function useWorkspace({ onAccessDenied } = {}) {
   }, [])
 
   useEffect(() => {
+    // Fetch on mount: load() sets state only after the request settles.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     load()
   }, [load])
 
   useEffect(() => {
-    if (accessState !== 'offline' || offlineRound === 0) {
-      setRetryIn(0)
-      return undefined
-    }
-    const delay = backoffDelay(offlineRound, { base: 2000, max: 60000 })
-    const due = Date.now() + delay
-    setRetryIn(Math.ceil(delay / 1000))
-    const countdown = setInterval(() => setRetryIn(Math.max(0, Math.ceil((due - Date.now()) / 1000))), 1000)
-    const timer = setTimeout(load, delay)
+    if (accessState !== 'offline' || !retry) return undefined
+    const countdown = setInterval(() => setNow(Date.now()), 1000)
+    const timer = setTimeout(load, Math.max(0, retry.due - Date.now()))
     return () => {
       clearTimeout(timer)
       clearInterval(countdown)
     }
-  }, [accessState, offlineRound, load])
+  }, [accessState, retry, load])
+
+  const retryIn = accessState === 'offline' && retry ? Math.max(0, Math.ceil((retry.due - now) / 1000)) : 0
 
   return { status, topics, inquiries, accessState, setAccessState, retryIn, refresh, load, reset }
 }

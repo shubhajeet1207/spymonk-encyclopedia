@@ -52,26 +52,21 @@ def _prune(directory: Path) -> None:
         path.unlink(missing_ok=True)
 
 
-def write_run_log(
+def build_run_log(
     topic: str,
     *,
     status: str,
     archive: dict,
     trace: ResearchTrace,
     failure_counts: dict[str, int],
-) -> Path | None:
-    """Store the run's developer log; a failure here never affects the run."""
-    directory = _directory
-    if directory is None:
-        return None
+) -> dict:
+    """The developer log for one run, as written to disk."""
     claims = list(archive.get("claims") or []) + list(archive.get("unresolved_claims") or [])
     reason = archive.get("failure_reason") or status
-    now = datetime.now(timezone.utc)
-    slug = re.sub(r"[^a-z0-9-]+", "", topic_slug(topic).lower())[:40].strip("-") or "topic"
-    log = {
+    return {
         "report": "spymonk.research_run",
         "schema_version": SCHEMA_VERSION,
-        "created_at": now.isoformat(),
+        "created_at": datetime.now(timezone.utc).isoformat(),
         "request_id": request_id_context.get(),
         "question": topic,
         "topic_key": canonical_topic(topic),
@@ -86,6 +81,23 @@ def write_run_log(
         },
         **developer_section(trace, claims, reason, failure_counts),
     }
+
+
+def write_run_log(
+    topic: str,
+    *,
+    status: str,
+    archive: dict,
+    trace: ResearchTrace,
+    failure_counts: dict[str, int],
+) -> Path | None:
+    """Store the run's developer log; a failure here never affects the run."""
+    directory = _directory
+    if directory is None:
+        return None
+    log = build_run_log(topic, status=status, archive=archive, trace=trace, failure_counts=failure_counts)
+    now = datetime.now(timezone.utc)
+    slug = re.sub(r"[^a-z0-9-]+", "", topic_slug(topic).lower())[:40].strip("-") or "topic"
     try:
         directory.mkdir(parents=True, exist_ok=True)
         path = directory / f"{now.strftime('%Y%m%dT%H%M%SZ')}-{status}-{slug}-{secrets.token_hex(3)}.json"

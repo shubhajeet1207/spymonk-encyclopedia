@@ -1,22 +1,62 @@
+# Every change to main goes through this pipeline: open a pull request from a
+# branch and merge it only when "CI passed" is green. See docs/CI_CD.md.
 name: CI
 
 on:
-  push:
   pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+  workflow_dispatch:
 
 permissions:
   contents: read
 
+concurrency:
+  group: ci-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+env:
+  PYTHON_VERSION: "3.11"
+  NODE_VERSION: "22"
+  GITLEAKS_VERSION: "8.30.1"
+
 jobs:
+  integrity:
+    name: Repository integrity and secrets
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0  # the secret scan covers the whole history
+      - uses: actions/setup-python@v7
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+      - name: Tracked files (no secrets files, personal data, or large files)
+        run: python scripts/ci/check_repo_policy.py
+      - name: Documentation links
+        run: python scripts/ci/check_docs_links.py
+      - name: Secret scan (gitleaks, full history)
+        run: |
+          base="https://github.com/gitleaks/gitleaks/releases/download/v${GITLEAKS_VERSION}"
+          archive="gitleaks_${GITLEAKS_VERSION}_linux_x64.tar.gz"
+          curl -sSfL -o "$archive" "$base/$archive"
+          curl -sSfL -o checksums.txt "$base/gitleaks_${GITLEAKS_VERSION}_checksums.txt"
+          grep " ${archive}\$" checksums.txt | sha256sum --check -
+          tar -xzf "$archive" gitleaks
+          ./gitleaks git . --redact --verbose --no-banner
+
   backend:
+    name: Backend lint, tests, and contracts
     runs-on: ubuntu-latest
     env:
       HF_HUB_DISABLE_TELEMETRY: "1"
+      SPYMONK_INSTANCE_LOCK: "false"
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
         with:
-          python-version: "3.11"
+          python-version: ${{ env.PYTHON_VERSION }}
           cache: pip
           cache-dependency-path: |
             requirements*.txt
@@ -26,49 +66,81 @@ jobs:
           python -m pip install
           --extra-index-url https://download.pytorch.org/whl/cpu
           -r requirements-dev.txt -c constraints.txt
-      - name: Unit tests
-        run: python -m unittest discover -s tests -t .
-
-  dependency-audit:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
-        with:
-          python-version: "3.11"
-      - run: python -m pip install pip-audit
-      - name: Audit Python dependencies for known vulnerabilities
-        run: pip-audit -r requirements-local-embeddings.txt
+      - name: Lint (ruff)
+        run: ruff check .
+      - name: Byte-compile
+        run: python -m compileall -q backend scripts tests app.py
+      - name: Unit tests with coverage gate
+        run: |
+          # Tests must never touch a real data directory: point it at an empty
+          # folder and fail if anything appears there.
+          export SPYMONK_DATA_DIR="$RUNNER_TEMP/spymonk-data"
+          mkdir -p "$SPYMONK_DATA_DIR"
+          coverage run -m unittest discover -s tests -t .
+          coverage report
+          if [ -n "$(find "$SPYMONK_DATA_DIR" -mindepth 1 -print -quit)" ]; then
+            echo "Tests wrote to the data directory:"
+            find "$SPYMONK_DATA_DIR" -mindepth 1 | head -20
+            exit 1
+          fi
+      - name: Stored formats and API contract
+        run: python scripts/check_contracts.py
 
   frontend:
+    name: Frontend lint, tests, and build
     runs-on: ubuntu-latest
     defaults:
       run:
         working-directory: frontend
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
         with:
-          node-version: "22"
+          node-version: ${{ env.NODE_VERSION }}
           cache: npm
           cache-dependency-path: frontend/package-lock.json
       - run: npm ci
+      - run: npm run lint
       - run: npm test
       - run: npm run build
-      - name: Audit runtime npm dependencies
-        run: npm audit --omit=dev --audit-level=high
 
-  container:
-    # The image deployed to Hugging Face Spaces (docs/DEPLOY_HF_SPACES.md).
+  dependencies:
+    name: Dependency vulnerabilities
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - name: Build the deployment image
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+      - uses: actions/setup-node@v7
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      - run: python -m pip install pip-audit==2.10.1
+      - name: Python (the exact pinned versions that ship)
+        # These chromadb advisories affect only the Chroma server, which SpyMonk
+        # never runs; see "Accepted vulnerabilities" in docs/CI_CD.md.
+        run: >
+          pip-audit -r constraints.txt --no-deps --disable-pip
+          --ignore-vuln PYSEC-2026-311
+          --ignore-vuln PYSEC-2026-3813
+          --ignore-vuln PYSEC-2026-3814
+          --ignore-vuln PYSEC-2026-3815
+      - name: npm (runtime and build tools)
+        working-directory: frontend
+        run: npm audit --audit-level=high
+
+  container:
+    name: Deployment image
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - name: Build the image deployed to Hugging Face Spaces
         run: docker build --tag spymonk:ci .
       - name: Refuse to start without a token in hosted mode
         run: |
           if docker run --rm -e SPACE_ID=ci/spymonk -e SPACE_HOST=ci-spymonk.hf.space spymonk:ci; then
-            echo "The hosted image started without APP_API_TOKEN" && exit 1
+            echo "The hosted image started without APP_API_TOKEN"
+            exit 1
           fi
       - name: Start with a token and serve the UI and health check
         run: |
@@ -78,5 +150,21 @@ jobs:
             curl -sf -H "Host: ci-spymonk.hf.space" http://127.0.0.1:7860/api/health && break
             sleep 2
           done
+          curl -sf -H "Host: ci-spymonk.hf.space" http://127.0.0.1:7860/api/health
           curl -sf -H "Host: ci-spymonk.hf.space" http://127.0.0.1:7860/ | grep -q '<div id="root">'
-          docker logs spymonk
+          test "$(curl -s -o /dev/null -w '%{http_code}' -H 'Host: ci-spymonk.hf.space' http://127.0.0.1:7860/api/status)" = 401
+      - name: Container logs
+        if: always()
+        run: docker logs spymonk || true
+
+  ci-passed:
+    # The one check to require in branch protection.
+    name: CI passed
+    if: always()
+    needs: [integrity, backend, frontend, dependencies, container]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Every job succeeded
+        if: contains(needs.*.result, 'failure') || contains(needs.*.result, 'cancelled') || contains(needs.*.result, 'skipped')
+        run: exit 1
+      - run: echo "All checks passed."
