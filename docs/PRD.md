@@ -43,7 +43,7 @@ Help one researcher build and query a reusable evidence archive, producing conci
 
 ### Visual direction — proposed from the supplied references
 
-The UI should take visual inspiration from the two supplied retro desktop-interface illustrations: [example 1](../9043432.jpg) and [example 2](../9046442.jpg). Treat them as a mood board for the app’s visual language, not as literal screen layouts or content to copy.
+The UI should take visual inspiration from the two supplied retro desktop-interface illustrations (`9043432.jpg` and `9046442.jpg`, kept out of the repository because they are third-party stock art). Treat them as a mood board for the app’s visual language, not as literal screen layouts or content to copy.
 
 - **Palette:** warm cream/peach for primary surfaces, orange/coral for prominent actions and active title bars, pale lavender for secondary surfaces and selected states, and deep navy/ink for text, rules, and outlines.
 - **Shape and detail:** crisp outlined panels, restrained desktop-window chrome, simple illustrated/icon-library symbols, and a light paper/grain accent only in low-information areas. Avoid decorative texture behind long text or evidence.

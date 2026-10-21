@@ -7,6 +7,19 @@ updates:
     schedule:
       interval: weekly
     open-pull-requests-limit: 5
+    # Versions another shipped package caps today. Each of these PRs can only
+    # fail to install, and while open they use up the limit above and block
+    # the updates that can land. Drop a rule once its capping package lifts
+    # the cap (check with `pip install --dry-run`).
+    ignore:
+      - dependency-name: huggingface-hub   # sentence-transformers, langchain-huggingface: <2.0
+        versions: [">=2.0"]
+      - dependency-name: uuid-utils        # langchain-core, langsmith: <1.0
+        versions: [">=1.0"]
+      - dependency-name: websockets        # langgraph-sdk (via langchain): <17
+        versions: [">=17"]
+      - dependency-name: mpmath            # sympy (via torch): <1.4
+        versions: [">=1.4"]
     groups:
       python:
         patterns: ["*"]
@@ -28,3 +41,8 @@ updates:
     directory: /
     schedule:
       interval: weekly
+    # The Python base image moves with the dependency set, not on its own:
+    # torch, onnxruntime and chromadb need wheels for the new version first.
+    ignore:
+      - dependency-name: python
+        update-types: ["version-update:semver-minor", "version-update:semver-major"]

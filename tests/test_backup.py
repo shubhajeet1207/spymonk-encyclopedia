@@ -169,10 +169,15 @@ class HostedStartupTests(unittest.TestCase):
     def test_hosted_api_hides_the_schema(self) -> None:
         from backend.main import create_app
 
+        # What answers instead depends on whether frontend/dist was built (the
+        # SPA's index.html, or FastAPI's JSON 404), so assert on the schema
+        # itself — with the docs-on case as the control that it would show.
+        with patch.object(config, "API_DOCS", True):
+            shown = TestClient(create_app(), base_url="http://localhost").get("/openapi.json")
         with patch.object(config, "API_DOCS", False):
-            client = TestClient(create_app(), base_url="http://localhost")
-            response = client.get("/openapi.json")
-        self.assertFalse(response.headers.get("content-type", "").startswith("application/json"))
+            hidden = TestClient(create_app(), base_url="http://localhost").get("/openapi.json")
+        self.assertIn('"openapi"', shown.text)
+        self.assertNotIn('"openapi"', hidden.text)
 
 
 class SpaceDefaultsTests(unittest.TestCase):
@@ -209,8 +214,14 @@ class DeployScriptTests(unittest.TestCase):
         self.assertEqual(forbidden, [])
 
     def test_a_secret_file_in_the_allow_list_stops_the_deploy(self) -> None:
-        with patch.object(self.deploy, "INCLUDE", (*self.deploy.INCLUDE, ".env")), self.assertRaises(SystemExit):
-            self.deploy.deploy_files()
+        # A throwaway root with its own .env: the guard only sees files that
+        # exist, and whether the checkout has a real .env depends on whose
+        # machine runs the suite (CI's checkout has none).
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            (root / ".env").write_text("PLACEHOLDER=1\n", encoding="utf-8")
+            with patch.object(self.deploy, "INCLUDE", (".env",)), self.assertRaises(SystemExit):
+                self.deploy.deploy_files(root)
 
     def test_settings_come_from_the_environment_or_fail(self) -> None:
         with patch.dict(os.environ, {"LLM_MODEL": "some/model"}):
